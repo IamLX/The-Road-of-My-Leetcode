@@ -1,2 +1,3 @@
-# Leetcode-
-活跃思路
+# Leetcode
+
+个人活跃思路，练习所用
