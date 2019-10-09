@@ -1,0 +1,61 @@
+给出一个字符串 s（仅含有小写英文字母和括号）。
+请你按照从括号内到外的顺序，逐层反转每对匹配括号中的字符串，并返回最终的结果。
+注意，您的结果中不应包含任何括号。
+
+示例 1：
+输入：s = "(abcd)"
+输出："dcba"
+
+示例 2：
+输入：s = "(u(love)i)"
+输出："iloveu"
+
+示例 3：
+输入：s = "(ed(et(oc))el)"
+输出："leetcode"
+
+示例 4：
+输入：s = "a(bcdefghijkl(mno)p)q"
+输出："apmnolkjihgfedcbq"
+
+提示
+	0 <= s.length <= 2000
+	s 中只有小写英文字母和括号
+	我们确保所有括号都是成对出现的
+
+代码:
+把字符压进队列，遇到’)’则把队列中到最近的”(”为止的字符全部反转重新进队列，最后得到的字符串即满足条件
+class Solution {
+public:
+    string reverseParentheses(string s) {
+        deque<char> temp;
+        string c;
+        int i=0;
+        while(i<s.size()){
+            if(s[i]==')'){
+                string c;
+                while(temp.back()!='('){
+                    c.push_back(temp.back());
+                    temp.pop_back();
+                }
+                temp.pop_back();
+                int j=0;
+                while(j<c.size()){
+                    temp.push_back(c[j++]);
+                }
+                i++;
+            }
+            else {
+                temp.push_back(s[i]);
+                i++;
+            }
+        }
+        string result;
+        while(!temp.empty()){
+            result.push_back(temp.front());
+            temp.pop_front();
+        }
+        return result;
+    }
+};
+
